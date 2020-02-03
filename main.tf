@@ -62,7 +62,8 @@ module "ecs-fargate-task-definition" {
 # ECS Service
 # ---------------------------------------------------------------------------------------------------------------------
 module "ecs-fargate-service" {
-  source              = "cn-terraform/ecs-fargate-service/aws"
+  # source              = "cn-terraform/ecs-fargate-service/aws"
+  source              = "git@github.com:/orther/terraform-aws-ecs-fargate-service"
   version             = "1.0.7"
   name_preffix        = var.name_preffix
   profile             = var.profile
@@ -71,19 +72,20 @@ module "ecs-fargate-service" {
   private_subnets     = var.private_subnets_ids
   public_subnets      = var.public_subnets_ids
 
-  ecs_cluster_name      = module.ecs-cluster.aws_ecs_cluster_cluster_name
-  ecs_cluster_arn       = module.ecs-cluster.aws_ecs_cluster_cluster_arn
-  task_definition_arn   = module.ecs-fargate-task-definition.aws_ecs_task_definition_td_arn
-  container_name        = module.ecs-fargate-task-definition.container_name
-  container_port        = module.ecs-fargate-task-definition.container_port
-  desired_count         = var.desired_count
-  platform_version      = var.platform_version
-  propagate_tags        = var.propagate_tags
-  service_registries    = var.service_registries
-  security_groups       = var.security_groups
-  assign_public_ip      = var.assign_public_ip
-  placement_constraints = var.placement_constraints_ecs_service
-  lb_health_check_path  = var.lb_health_check_path
+  ecs_cluster_name        = module.ecs-cluster.aws_ecs_cluster_cluster_name
+  ecs_cluster_arn         = module.ecs-cluster.aws_ecs_cluster_cluster_arn
+  task_definition_arn     = module.ecs-fargate-task-definition.aws_ecs_task_definition_td_arn
+  container_name          = module.ecs-fargate-task-definition.container_name
+  container_port          = module.ecs-fargate-task-definition.container_port
+  desired_count           = var.desired_count
+  platform_version        = var.platform_version
+  propagate_tags          = var.propagate_tags
+  service_registries      = var.service_registries
+  security_groups         = var.security_groups
+  assign_public_ip        = var.assign_public_ip
+  placement_constraints   = var.placement_constraints_ecs_service
+  lb_health_check_path    = var.lb_health_check_path
+  lb_health_check_timeout = var.lb_health_check_timeout
   deployment_maximum_percent         = var.deployment_maximum_percent
   deployment_minimum_healthy_percent = var.deployment_minimum_healthy_percent
   enable_ecs_managed_tags            = var.enable_ecs_managed_tags
