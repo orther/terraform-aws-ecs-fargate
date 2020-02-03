@@ -63,7 +63,7 @@ module "ecs-fargate-task-definition" {
 # ---------------------------------------------------------------------------------------------------------------------
 module "ecs-fargate-service" {
   # source              = "cn-terraform/ecs-fargate-service/aws"
-  source              = "git@github.com:/orther/terraform-aws-ecs-fargate-service"
+  source              = "github.com/orther/terraform-aws-ecs-fargate-service"
   version             = "1.0.7"
   name_preffix        = var.name_preffix
   profile             = var.profile
